@@ -1,0 +1,236 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server Petstore server.",
+        "title": "Swagger Example API",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "host": "example.test.com",
+    "paths": {
+        "/user/v1/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户登录",
+                "parameters": [
+                    {
+                        "description": "请求正文",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.UserLoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.UserLoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/v1/logout": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户登出",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/base.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/v1/profile": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户信息",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.UserProfileResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/v1/signup": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户注册",
+                "parameters": [
+                    {
+                        "description": "请求正文",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.UserSignupRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/base.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "base.Response": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "错误描述",
+                    "type": "string"
+                },
+                "error_code": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
+                "msg": {
+                    "description": "提示信息",
+                    "type": "string"
+                }
+            }
+        },
+        "user.UserLoginRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "user.UserLoginResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "错误描述",
+                    "type": "string"
+                },
+                "error_code": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
+                "msg": {
+                    "description": "提示信息",
+                    "type": "string"
+                },
+                "result": {
+                    "description": "用户信息",
+                    "$ref": "#/definitions/user.UserModel"
+                }
+            }
+        },
+        "user.UserModel": {
+            "type": "object",
+            "properties": {
+                "nickname": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "user.UserProfileResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "错误描述",
+                    "type": "string"
+                },
+                "error_code": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
+                "msg": {
+                    "description": "提示信息",
+                    "type": "string"
+                },
+                "result": {
+                    "$ref": "#/definitions/user.UserModel"
+                }
+            }
+        },
+        "user.UserSignupRequest": {
+            "type": "object",
+            "required": [
+                "nickname",
+                "password",
+                "re_password",
+                "username"
+            ],
+            "properties": {
+                "nickname": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "re_password": {
+                    "description": "重复密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

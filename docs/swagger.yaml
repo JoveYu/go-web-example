@@ -1,0 +1,159 @@
+definitions:
+  base.Response:
+    properties:
+      error:
+        description: 错误描述
+        type: string
+      error_code:
+        description: 错误码
+        type: integer
+      msg:
+        description: 提示信息
+        type: string
+    type: object
+  user.UserLoginRequest:
+    properties:
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    type: object
+  user.UserLoginResponse:
+    properties:
+      error:
+        description: 错误描述
+        type: string
+      error_code:
+        description: 错误码
+        type: integer
+      msg:
+        description: 提示信息
+        type: string
+      result:
+        $ref: '#/definitions/user.UserModel'
+        description: 用户信息
+    type: object
+  user.UserModel:
+    properties:
+      nickname:
+        description: 昵称
+        type: string
+      username:
+        description: 用户名
+        type: string
+    type: object
+  user.UserProfileResponse:
+    properties:
+      error:
+        description: 错误描述
+        type: string
+      error_code:
+        description: 错误码
+        type: integer
+      msg:
+        description: 提示信息
+        type: string
+      result:
+        $ref: '#/definitions/user.UserModel'
+    type: object
+  user.UserSignupRequest:
+    properties:
+      nickname:
+        description: 昵称
+        type: string
+      password:
+        description: 密码
+        type: string
+      re_password:
+        description: 重复密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - nickname
+    - password
+    - re_password
+    - username
+    type: object
+host: example.test.com
+info:
+  contact: {}
+  description: This is a sample server Petstore server.
+  license: {}
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /user/v1/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求正文
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserLoginResponse'
+      summary: 用户登录
+      tags:
+      - 用户
+  /user/v1/logout:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/base.Response'
+      summary: 用户登出
+      tags:
+      - 用户
+  /user/v1/profile:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserProfileResponse'
+      summary: 用户信息
+      tags:
+      - 用户
+  /user/v1/signup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求正文
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserSignupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/base.Response'
+      summary: 用户注册
+      tags:
+      - 用户
+swagger: "2.0"
