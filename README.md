@@ -7,6 +7,7 @@
 | orm         | gorm                    | API简介，同时支持ORM和sqlbuilder             |                            |
 | docs        | swag                    | 注释方式生成文档，额外操作少，自动解析结构体 |                            |
 | log         | zerolog                 | 高性能，0内存分配，结构化                    | 缺点，使用需要指定参数类型 |
+| config      | viper                   | 功能强大，支持多种方式获取配置               |                            |
 | metrics     | opentelemetry+prmetheus | 公认metrics方案                              | 待实现                     |
 | trace       | opentelemetry+jaeger    | 公认trace方案                                | 待实现                     |
 
