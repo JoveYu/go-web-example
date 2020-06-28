@@ -12,4 +12,5 @@ require (
 	github.com/spf13/viper v1.7.0
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.7
+	github.com/zsais/go-gin-prometheus v0.1.0
 )

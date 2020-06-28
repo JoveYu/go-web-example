@@ -8,7 +8,7 @@
 | docs        | swag                 | 注释方式生成文档，额外操作少，自动解析结构体 |                                   |
 | log         | zerolog              | 高性能，0内存分配，结构化                    | 缺点，使用需要指定参数类型        |
 | config      | viper                | 功能强大，支持多种方式获取配置               |                                   |
-| metrics     | prmetheus            | 公认metrics方案                              | 待实现                            |
+| metrics     | prmetheus            | 公认metrics方案                              |                                   |
 | trace       | opentelemetry+jaeger | 公认trace方案                                | 待实现                            |
 
 # 文档地址

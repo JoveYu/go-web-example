@@ -13,6 +13,7 @@ import (
 	"github.com/rs/zerolog/log"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	ginprometheus "github.com/zsais/go-gin-prometheus"
 
 	"test.com/example/apps/base"
 	"test.com/example/apps/user"
@@ -55,6 +56,9 @@ func main() {
 	}
 	r.Use(logger.SetLogger())
 	r.Use(gin.Recovery())
+
+	// add metrics
+	ginprometheus.NewPrometheus("").Use(r)
 
 	// add session
 	store := cookie.NewStore([]byte("secret")) // use redis in production
