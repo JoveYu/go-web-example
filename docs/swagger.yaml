@@ -34,6 +34,7 @@ definitions:
       result:
         $ref: '#/definitions/user.UserModel'
         description: 用户信息
+        type: object
     type: object
   user.UserModel:
     properties:
@@ -57,6 +58,7 @@ definitions:
         type: string
       result:
         $ref: '#/definitions/user.UserModel'
+        type: object
     type: object
   user.UserSignupRequest:
     properties:

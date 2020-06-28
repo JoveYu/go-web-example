@@ -1,4 +1,4 @@
 debug: true
 port: 8080
 database_type: sqlite3
-database: "file::memory:?cache=shared"
+database: test.db

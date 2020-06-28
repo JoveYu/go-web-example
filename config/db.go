@@ -13,5 +13,6 @@ func InitDatabase() error {
 	if err != nil {
 		return err
 	}
+
 	return nil
 }

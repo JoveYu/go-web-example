@@ -184,6 +184,7 @@ var doc = `{
                 },
                 "result": {
                     "description": "用户信息",
+                    "type": "object",
                     "$ref": "#/definitions/user.UserModel"
                 }
             }
@@ -217,6 +218,7 @@ var doc = `{
                     "type": "string"
                 },
                 "result": {
+                    "type": "object",
                     "$ref": "#/definitions/user.UserModel"
                 }
             }

@@ -6,6 +6,10 @@ type UserModel struct {
 	Nickname string `json:"nickname"` // 昵称
 }
 
+func (UserModel) TableName() string {
+	return "user"
+}
+
 func (u *UserModel) SetPassword(pass string) {
 	u.Password = EncodePassword(pass)
 }

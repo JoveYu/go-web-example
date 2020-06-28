@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 )
 
@@ -30,9 +29,9 @@ func Parse() (*config, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Debug().
-		Interface("config", Config).
-		Msg("load config success")
+	// log.Debug().
+	// 	Interface("config", Config).
+	// 	Msg("load config success")
 
 	return Config, nil
 }

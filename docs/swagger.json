@@ -168,6 +168,7 @@
                 },
                 "result": {
                     "description": "用户信息",
+                    "type": "object",
                     "$ref": "#/definitions/user.UserModel"
                 }
             }
@@ -201,6 +202,7 @@
                     "type": "string"
                 },
                 "result": {
+                    "type": "object",
                     "$ref": "#/definitions/user.UserModel"
                 }
             }

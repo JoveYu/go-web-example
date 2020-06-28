@@ -1,9 +1,11 @@
 package user
 
 import (
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 
 	"test.com/example/apps/base"
+	"test.com/example/config"
 )
 
 type UserSignupRequest struct {
@@ -21,7 +23,33 @@ type UserSignupRequest struct {
 // @Success 200 {object} base.Response
 // @Router /user/v1/signup [post]
 func UserSignupView(ctx *gin.Context) {
+	req := UserSignupRequest{}
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, err.Error()))
+		return
+	}
 
+	count := -1
+	config.DB.Model(&UserModel{}).Where("username = ?", req.Username).Count(&count)
+	if count > 0 {
+		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, "", "用户已存在"))
+		return
+	}
+
+	user := UserModel{
+		Username: req.Username,
+		Nickname: req.Nickname,
+	}
+	user.SetPassword(req.Password)
+
+	err = config.DB.Create(user).Error
+	if err != nil {
+		ctx.JSON(200, base.NewResponse(base.ERR_DB, err.Error()))
+		return
+	}
+
+	ctx.JSON(200, base.NewResponse(base.OK))
 }
 
 type UserLoginRequest struct {
@@ -42,6 +70,33 @@ type UserLoginResponse struct {
 // @Success 200 {object} UserLoginResponse
 // @Router /user/v1/login [post]
 func UserLoginView(ctx *gin.Context) {
+	req := UserLoginRequest{}
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, err.Error()))
+		return
+	}
+
+	user := UserModel{}
+	err = config.DB.First(&user, "username=?", req.Username).Error
+	if err != nil {
+		ctx.JSON(200, base.NewResponse(base.ERR_USER, err.Error(), "用户不存在"))
+		return
+	}
+
+	if !user.CheckPassword(req.Password) {
+		ctx.JSON(200, base.NewResponse(base.ERR_USER, "", "密码错误"))
+		return
+	}
+
+	session := sessions.Default(ctx)
+	session.Set("username", user.Username)
+	session.Save()
+
+	ctx.JSON(200, UserLoginResponse{
+		Response: base.NewResponse(base.OK),
+		Result:   user,
+	})
 
 }
 
@@ -52,6 +107,11 @@ func UserLoginView(ctx *gin.Context) {
 // @Success 200 {object} base.Response
 // @Router /user/v1/logout [post]
 func UserLogoutView(ctx *gin.Context) {
+	session := sessions.Default(ctx)
+	session.Clear()
+	session.Save()
+
+	ctx.JSON(200, base.NewResponse(base.OK))
 
 }
 
@@ -67,5 +127,16 @@ type UserProfileResponse struct {
 // @Success 200 {object} UserProfileResponse
 // @Router /user/v1/profile [get]
 func UserProfileView(ctx *gin.Context) {
+	username := ctx.GetString("username")
 
+	user := UserModel{}
+	err := config.DB.First(&user, "username=?", username).Error
+	if err != nil {
+		ctx.JSON(200, base.NewResponse(base.ERR_DB, "", "数据库错误"))
+		return
+	}
+	ctx.JSON(200, UserProfileResponse{
+		Response: base.NewResponse(base.OK),
+		Result:   user,
+	})
 }
