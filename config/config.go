@@ -1,12 +1,15 @@
 package config
 
 import (
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 )
 
 type config struct {
-	Debug bool `yaml:"debug" json:"debug" toml:"debug"`
-	Port  int  `yaml:"port" json:"port" toml:"port"`
+	Debug        bool   `mapstructure:"debug"`
+	Port         int    `mapstructure:"port"`
+	DatabaseType string `mapstructure:"database_type"`
+	Database     string `mapstructure:"database"`
 }
 
 // default config
@@ -27,6 +30,10 @@ func Parse() (*config, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Debug().
+		Interface("config", Config).
+		Msg("load config success")
+
 	return Config, nil
 }
 

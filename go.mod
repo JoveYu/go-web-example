@@ -7,6 +7,7 @@ require (
 	github.com/gin-contrib/logger v0.0.2
 	github.com/gin-contrib/sessions v0.0.3
 	github.com/gin-gonic/gin v1.6.3
+	github.com/jinzhu/gorm v1.9.14
 	github.com/rs/zerolog v1.19.0
 	github.com/spf13/viper v1.7.0
 	github.com/swaggo/gin-swagger v1.2.0

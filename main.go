@@ -32,6 +32,12 @@ func main() {
 		panic(err)
 	}
 
+	// init db
+	err = config.InitDatabase()
+	if err != nil {
+		panic(err)
+	}
+
 	r := gin.New()
 
 	// add logger
