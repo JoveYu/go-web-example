@@ -12,10 +12,7 @@ func PingView(ctx *gin.Context) {
 func LoginRequiredView(ctx *gin.Context) {
 	session := sessions.Default(ctx)
 	if session.Get("username") == nil {
-		ctx.JSON(200, Response{
-			ErrorCode: -1,
-			Msg:       "login required",
-		})
+		ctx.JSON(200, NewResponse(ERR_LOGIN))
 		ctx.Abort()
 		return
 	}

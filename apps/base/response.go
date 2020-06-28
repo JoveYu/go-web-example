@@ -12,7 +12,7 @@ const (
 
 var ERR_MSG = map[ErrorCode]string{
 	OK:         "请求成功",
-	ERR_LOGIN:  "登录失败",
+	ERR_LOGIN:  "用户未登录",
 	ERR_PARAMS: "参数错误",
 	ERR_DB:     "数据库错误",
 	ERR_USER:   "用户错误",
