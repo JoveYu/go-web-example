@@ -21,3 +21,5 @@
 
 - `make swagger` 生成文档
 - `make run`  运行
+- `make build`  编译
+- `make watch`  运行并随代码变化自动重启
