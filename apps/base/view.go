@@ -16,7 +16,6 @@ func LoginRequiredView(ctx *gin.Context) {
 		ctx.Abort()
 		return
 	}
-	ctx.Set("username", session.Get("username"))
 	// 下一个handler处理
 	ctx.Next()
 }
