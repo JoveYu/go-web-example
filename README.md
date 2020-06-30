@@ -11,11 +11,13 @@
 | metrics     | prmetheus            | 公认metrics方案                              |                                   |
 | trace       | opentelemetry+jaeger | 公认trace方案                                | 待实现                            |
 
-# 文档地址
+# 地址
 
-`http://127.0.0.1:8080/swagger/index.html` 文档查看网页
+`/swagger/index.html` 文档查看网页
 
-`http://127.0.0.1:8080/swagger/doc.json` swaggerjson，可以自动导入到YAPI
+`/swagger/doc.json` swaggerjson，可以自动导入到YAPI
+
+`/metrics` 指标地址，提供给prometheus采集
 
 # 命令
 
@@ -23,3 +25,6 @@
 - `make run`  运行
 - `make build`  编译
 - `make watch`  运行并随代码变化自动重启
+- `make docker.build` 编译docker镜像
+- `make docker.run` 运行docker镜像
+- `make docker.push` 上传docker镜像

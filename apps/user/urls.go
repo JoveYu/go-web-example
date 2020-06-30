@@ -4,9 +4,16 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"test.com/example/apps/base"
+	"test.com/example/config"
 )
 
 func SetRouter(router *gin.Engine) {
+	// 调试环境自动创建表
+	conf := config.Get()
+	if conf.Debug {
+		AutoMigrate()
+	}
+
 	user := router.Group("/user")
 
 	v1 := user.Group("/v1")

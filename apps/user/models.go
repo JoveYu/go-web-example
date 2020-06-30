@@ -1,5 +1,9 @@
 package user
 
+import (
+	"test.com/example/config"
+)
+
 type UserModel struct {
 	Username string `json:"username"` // 用户名
 	Password string `json:"-"`        // 密码
@@ -21,4 +25,8 @@ func (u UserModel) CheckPassword(pass string) bool {
 func EncodePassword(pass string) string {
 	// TODO: get password hash
 	return pass
+}
+
+func AutoMigrate() {
+	config.DB.AutoMigrate(&UserModel{})
 }
