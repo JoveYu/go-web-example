@@ -3,9 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
-	"github.com/gin-contrib/logger"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -13,10 +11,10 @@ import (
 	"github.com/rs/zerolog/log"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	ginprometheus "github.com/zsais/go-gin-prometheus"
 
 	"test.com/example/apps/base"
 	"test.com/example/apps/user"
+	"test.com/example/common/middleware"
 	"test.com/example/config"
 	_ "test.com/example/docs"
 )
@@ -41,7 +39,6 @@ func main() {
 	r := gin.New()
 
 	// add logger
-	zerolog.DurationFieldUnit = time.Millisecond // ms
 	if c.Debug {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
 		log.Logger = log.Output(
@@ -54,11 +51,12 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	}
-	r.Use(logger.SetLogger())
+	r.Use(middleware.RequestLog())
 	r.Use(gin.Recovery())
 
 	// add metrics
-	ginprometheus.NewPrometheus("").Use(r)
+	r.Use(middleware.Prometheus())
+	r.GET("/metrics", middleware.PrometheusHandler())
 
 	// add session
 	store := cookie.NewStore([]byte("secret")) // use redis in production
