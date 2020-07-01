@@ -21,7 +21,7 @@ import (
 
 // @title Swagger Example API
 // @version 1.0
-// @description This is a sample server Petstore server.
+// @description This is a sample server.
 // @host example.test.com
 func main() {
 	// parse config
