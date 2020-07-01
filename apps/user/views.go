@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"test.com/example/apps/base"
+	"test.com/example/common/util"
 	"test.com/example/config"
 )
 
@@ -26,7 +27,7 @@ func UserSignupView(ctx *gin.Context) {
 	req := UserSignupRequest{}
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
-		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, err.Error()))
+		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, util.WrapValidationError(err)))
 		return
 	}
 
@@ -53,8 +54,8 @@ func UserSignupView(ctx *gin.Context) {
 }
 
 type UserLoginRequest struct {
-	Username string `json:"username"` // 用户名
-	Password string `json:"password"` // 密码
+	Username string `json:"username" binding:"required"` // 用户名
+	Password string `json:"password" binding:"required"` // 密码
 }
 
 type UserLoginResponse struct {
@@ -73,7 +74,7 @@ func UserLoginView(ctx *gin.Context) {
 	req := UserLoginRequest{}
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
-		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, err.Error()))
+		ctx.JSON(200, base.NewResponse(base.ERR_PARAMS, util.WrapValidationError(err)))
 		return
 	}
 

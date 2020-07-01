@@ -19,6 +19,9 @@ definitions:
       username:
         description: 用户名
         type: string
+    required:
+    - password
+    - username
     type: object
   user.UserLoginResponse:
     properties:

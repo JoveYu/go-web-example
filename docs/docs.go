@@ -156,6 +156,10 @@ var doc = `{
         },
         "user.UserLoginRequest": {
             "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
             "properties": {
                 "password": {
                     "description": "密码",

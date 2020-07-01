@@ -63,8 +63,7 @@ func main() {
 	r.Use(sessions.Sessions("session", store))
 
 	// add swagger
-	swaggerUrl := ginSwagger.URL("/swagger/doc.json")
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerUrl))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// add url
 	r.GET("/ping", base.PingView)
