@@ -5,6 +5,7 @@ import (
 )
 
 type UserModel struct {
+	ID       uint   `json:"id" gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
 	Username string `json:"username"` // 用户名
 	Password string `json:"-"`        // 密码
 	Nickname string `json:"nickname"` // 昵称

@@ -41,6 +41,8 @@ definitions:
     type: object
   user.UserModel:
     properties:
+      id:
+        type: integer
       nickname:
         description: 昵称
         type: string

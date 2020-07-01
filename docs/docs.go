@@ -196,6 +196,9 @@ var doc = `{
         "user.UserModel": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "integer"
+                },
                 "nickname": {
                     "description": "昵称",
                     "type": "string"
