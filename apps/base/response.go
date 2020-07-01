@@ -19,19 +19,19 @@ var ERR_MSG = map[ErrorCode]string{
 }
 
 type Response struct {
-	ErrorCode ErrorCode `json:"error_code"` // 错误码
-	Error     string    `json:"error"`      // 错误描述
-	Msg       string    `json:"msg"`        // 提示信息
+	Code    ErrorCode `json:"code"`    // 错误码
+	Error   string    `json:"error"`   // 错误描述
+	Message string    `json:"message"` // 提示信息
 }
 
 func NewResponse(code ErrorCode, s ...string) Response {
 	r := Response{
-		ErrorCode: code,
+		Code: code,
 	}
 	if v, ok := ERR_MSG[code]; ok {
-		r.Msg = v
+		r.Message = v
 	} else {
-		r.Msg = "未知错误"
+		r.Message = "未知错误"
 	}
 
 	if len(s) > 0 {
@@ -39,7 +39,7 @@ func NewResponse(code ErrorCode, s ...string) Response {
 	}
 
 	if len(s) > 1 {
-		r.Msg = s[1]
+		r.Message = s[1]
 	}
 
 	return r

@@ -1,13 +1,13 @@
 definitions:
   base.Response:
     properties:
+      code:
+        description: 错误码
+        type: integer
       error:
         description: 错误描述
         type: string
-      error_code:
-        description: 错误码
-        type: integer
-      msg:
+      message:
         description: 提示信息
         type: string
     type: object
@@ -25,13 +25,13 @@ definitions:
     type: object
   user.UserLoginResponse:
     properties:
+      code:
+        description: 错误码
+        type: integer
       error:
         description: 错误描述
         type: string
-      error_code:
-        description: 错误码
-        type: integer
-      msg:
+      message:
         description: 提示信息
         type: string
       result:
@@ -50,13 +50,13 @@ definitions:
     type: object
   user.UserProfileResponse:
     properties:
+      code:
+        description: 错误码
+        type: integer
       error:
         description: 错误描述
         type: string
-      error_code:
-        description: 错误码
-        type: integer
-      msg:
+      message:
         description: 提示信息
         type: string
       result:

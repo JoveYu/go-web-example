@@ -140,15 +140,15 @@ var doc = `{
         "base.Response": {
             "type": "object",
             "properties": {
+                "code": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
                 "error": {
                     "description": "错误描述",
                     "type": "string"
                 },
-                "error_code": {
-                    "description": "错误码",
-                    "type": "integer"
-                },
-                "msg": {
+                "message": {
                     "description": "提示信息",
                     "type": "string"
                 }
@@ -174,15 +174,15 @@ var doc = `{
         "user.UserLoginResponse": {
             "type": "object",
             "properties": {
+                "code": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
                 "error": {
                     "description": "错误描述",
                     "type": "string"
                 },
-                "error_code": {
-                    "description": "错误码",
-                    "type": "integer"
-                },
-                "msg": {
+                "message": {
                     "description": "提示信息",
                     "type": "string"
                 },
@@ -209,15 +209,15 @@ var doc = `{
         "user.UserProfileResponse": {
             "type": "object",
             "properties": {
+                "code": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
                 "error": {
                     "description": "错误描述",
                     "type": "string"
                 },
-                "error_code": {
-                    "description": "错误码",
-                    "type": "integer"
-                },
-                "msg": {
+                "message": {
                     "description": "提示信息",
                     "type": "string"
                 },
