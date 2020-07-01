@@ -41,12 +41,12 @@ func Prometheus() gin.HandlerFunc {
 		Subsystem: "http",
 		Name:      "requests_total",
 		Help:      "How many HTTP requests processed, partitioned by status code and HTTP method.",
-	}, []string{"code", "method", "url"})
+	}, []string{"status", "method", "path"})
 	requestDurationMetrics := promauto.NewHistogramVec(prometheus.HistogramOpts{
 		Subsystem: "http",
 		Name:      "request_duration_seconds",
 		Help:      "The HTTP request latencies in seconds.",
-	}, []string{"code", "method", "url"})
+	}, []string{"status", "method", "path"})
 	requestSizeMetrics := promauto.NewSummary(prometheus.SummaryOpts{
 		Subsystem: "http",
 		Name:      "request_size_bytes",
@@ -65,9 +65,6 @@ func Prometheus() gin.HandlerFunc {
 		status := strconv.Itoa(ctx.Writer.Status())
 		method := ctx.Request.Method
 		url := ctx.FullPath()
-		if url == "" {
-			url = ctx.Request.URL.Path
-		}
 		reqSz := computeApproximateRequestSize(ctx.Request)
 		respSz := float64(ctx.Writer.Size())
 
