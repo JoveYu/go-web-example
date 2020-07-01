@@ -92,7 +92,7 @@ func UserLoginView(ctx *gin.Context) {
 
 	session := sessions.Default(ctx)
 	session.Set("username", user.Username)
-	session.Save()
+	_ = session.Save()
 
 	ctx.JSON(200, UserLoginResponse{
 		Response: base.NewResponse(base.OK),
@@ -110,7 +110,7 @@ func UserLoginView(ctx *gin.Context) {
 func UserLogoutView(ctx *gin.Context) {
 	session := sessions.Default(ctx)
 	session.Clear()
-	session.Save()
+	_ = session.Save()
 
 	ctx.JSON(200, base.NewResponse(base.OK))
 
@@ -129,7 +129,6 @@ type UserProfileResponse struct {
 // @Router /user/v1/profile [get]
 func UserProfileView(ctx *gin.Context) {
 	username := ctx.GetString("username")
-
 	user := UserModel{}
 	err := config.DB.First(&user, "username=?", username).Error
 	if err != nil {
