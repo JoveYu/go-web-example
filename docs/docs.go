@@ -276,7 +276,7 @@ var SwaggerInfo = swaggerInfo{
 	BasePath:    "",
 	Schemes:     []string{},
 	Title:       "Swagger Example API",
-	Description: "This is a sample server Petstore server.",
+	Description: "This is a sample server.",
 }
 
 type s struct{}

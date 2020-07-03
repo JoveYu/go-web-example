@@ -88,7 +88,7 @@ definitions:
 host: example.test.com
 info:
   contact: {}
-  description: This is a sample server Petstore server.
+  description: This is a sample server.
   license: {}
   title: Swagger Example API
   version: "1.0"

@@ -132,7 +132,7 @@ func UserProfileView(ctx *gin.Context) {
 	user := UserModel{}
 	err := config.DB.First(&user, "username=?", username).Error
 	if err != nil {
-		ctx.JSON(200, base.NewResponse(base.ERR_DB, "", "数据库错误"))
+		ctx.JSON(200, base.NewResponse(base.ERR_DB, ""))
 		return
 	}
 	ctx.JSON(200, UserProfileResponse{
