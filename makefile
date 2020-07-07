@@ -2,7 +2,7 @@ GITTAG=$(shell git describe --abbrev=0 --tags)
 GITBRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 GITCOMMIT=$(shell git rev-parse --short HEAD)
 
-REGISTRY=harbor.yunwoke.com/tool/test
+REGISTRY=test.com/example
 IMAGE=${REGISTRY}:${GITBRANCH}-${GITCOMMIT}
 
 swagger:
