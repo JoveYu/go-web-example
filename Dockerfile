@@ -20,3 +20,4 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 COPY --from=builder /app/main /app/main
 COPY --from=builder /app/config.yaml /app/config.yaml
 CMD /app/main
+

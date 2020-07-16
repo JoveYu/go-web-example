@@ -16,7 +16,7 @@ func RequestLog() gin.HandlerFunc {
 		end := time.Now()
 
 		latency := end.Sub(start)
-		msg := "Request"
+		msg := "gin"
 		if len(ctx.Errors) > 0 {
 			msg = ctx.Errors.String()
 		}
@@ -32,7 +32,7 @@ func RequestLog() gin.HandlerFunc {
 			Str("method", ctx.Request.Method).
 			Str("path", path).
 			Str("ip", ctx.ClientIP()).
-			Int64("latency", int64(latency/time.Millisecond)). // ms
+			Int64("duration", int64(latency/time.Millisecond)). // ms
 			Str("user-agent", ctx.Request.UserAgent()).
 			Logger()
 

@@ -44,7 +44,7 @@ func UserSignupView(ctx *gin.Context) {
 	}
 	user.SetPassword(req.Password)
 
-	err = config.DB.Create(user).Error
+	err = config.DB.Create(&user).Error
 	if err != nil {
 		ctx.JSON(200, base.NewResponse(base.ERR_DB, err.Error()))
 		return
@@ -128,11 +128,12 @@ type UserProfileResponse struct {
 // @Success 200 {object} UserProfileResponse
 // @Router /user/v1/profile [get]
 func UserProfileView(ctx *gin.Context) {
-	username := ctx.GetString("username")
+	session := sessions.Default(ctx)
+	username := session.Get("username")
 	user := UserModel{}
 	err := config.DB.First(&user, "username=?", username).Error
 	if err != nil {
-		ctx.JSON(200, base.NewResponse(base.ERR_DB, ""))
+		ctx.JSON(200, base.NewResponse(base.ERR_DB, err.Error()))
 		return
 	}
 	ctx.JSON(200, UserProfileResponse{
