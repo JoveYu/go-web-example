@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -23,14 +22,14 @@ func RequestLog() gin.HandlerFunc {
 		status := ctx.Writer.Status()
 		path := ctx.Request.URL.Path
 		query := ctx.Request.URL.RawQuery
-		if query != "" {
-			path = fmt.Sprintf("%s?%s", path, query)
-		}
 
 		logger := log.With().
+			// Int64("request-length", ctx.Request.ContentLength).
+			// Int("response-length", ctx.Writer.Size()).
 			Int("status", status).
 			Str("method", ctx.Request.Method).
 			Str("path", path).
+			Str("query", query).
 			Str("ip", ctx.ClientIP()).
 			Int64("duration", int64(latency/time.Millisecond)). // ms
 			Str("user-agent", ctx.Request.UserAgent()).
