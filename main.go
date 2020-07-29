@@ -36,8 +36,6 @@ func main() {
 		panic(err)
 	}
 
-	r := gin.New()
-
 	// add logger
 	if c.Debug {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
@@ -51,6 +49,9 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	}
+
+	r := gin.New()
+
 	r.Use(middleware.RequestLog())
 	r.Use(gin.Recovery())
 
