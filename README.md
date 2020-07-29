@@ -11,6 +11,13 @@
 | metrics     | opentelemetry+prometheus |                                              |                                            |
 | trace       | opentelemetry+jaeger     |                                              | 待实现                                     |
 
+# 配置
+
+`debug` 开启调试模式
+1. 会同时开启gin的debug
+2. 会开启log的debuglevel
+3. 会修改log的输出格式
+
 # 地址
 
 `/swagger/index.html` 文档查看网页
