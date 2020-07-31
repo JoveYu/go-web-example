@@ -24,6 +24,7 @@ func RequestLog() gin.HandlerFunc {
 		query := ctx.Request.URL.RawQuery
 
 		logger := log.With().
+			Str("server", "gin").
 			// Int64("request-length", ctx.Request.ContentLength).
 			// Int("response-length", ctx.Writer.Size()).
 			Int("status", status).

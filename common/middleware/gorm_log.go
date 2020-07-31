@@ -27,6 +27,7 @@ func (l *GORMLogger) Print(v ...interface{}) {
 	switch v[0] {
 	case "sql":
 		log.WithLevel(l.Level).
+			Str("client", "gorm").
 			// Str("line", v[1].(string)).
 			Int64("duration", int64(v[2].(time.Duration)/time.Millisecond)).
 			Str("sql", v[3].(string)).
